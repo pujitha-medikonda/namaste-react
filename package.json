@@ -1,0 +1,27 @@
+{
+  "name": "namastereact",
+  "version": "1.0.0",
+  "description": "My react app",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pujitha-medikonda/namaste-react.git"
+  },
+  "author": "Pujitha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pujitha-medikonda/namaste-react/issues"
+  },
+  "homepage": "https://github.com/pujitha-medikonda/namaste-react#readme",
+  "dependencies": {
+    "parcel": "^2.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}
