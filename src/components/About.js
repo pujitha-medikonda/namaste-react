@@ -1,29 +1,25 @@
-import React, { useEffect } from "react";
+import useOnline from "../utilities/useOnline";
 import Header from "./Header";
-import Profile from "./ProfileClass";
+import ProfileClass from "./ProfileClass";
 
-class AboutUs extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("Parent Constructor");
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.log("Parent Component Update");
-  }
-  componentDidMount() {
-    console.log("Parent Component");
-  }
-  render() {
-    console.log("Parent render");
+const AboutUs = function () {
+  const isOffline = useOnline();
+  console.log("offline" + isOffline);
+  if (!isOffline) {
     return (
       <div>
         <Header></Header>
-        <h1>Its all about us in React Web Series</h1>
-        <Profile cnt={1} />
-        <Profile cnt={2} />
+        <p>🛑 Offline please come backLater</p>
       </div>
     );
   }
-}
+  return (
+    <div>
+      <Header></Header>
+      <h1>Its all about us in React Web Series</h1>
+      <ProfileClass />
+    </div>
+  );
+};
 
 export default AboutUs;
