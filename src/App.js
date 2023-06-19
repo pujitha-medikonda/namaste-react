@@ -10,7 +10,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/ProfileClass";
 import userContext from "./components/userContext";
 import Footer from "./components/Footer";
-
+import themeContex from "./components/useTheme";
 const Instamart = lazy(() => import("./components/Instamart"));
 
 const App = () => {
@@ -18,12 +18,16 @@ const App = () => {
     name: "pavam",
     email: "pujithamedi@gmail.com",
   });
+
+  const [theme, setTheme] = useState("light");
   return (
     <div className="pb-4">
       <userContext.Provider value={{ user, setUser }}>
         <Header></Header>
         <Outlet></Outlet>
-        <Footer />
+        <themeContex.Provider value={{ theme, setTheme }}>
+          <Footer />
+        </themeContex.Provider>
       </userContext.Provider>
     </div>
   );

@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import userContext from "./userContext";
+import themeContext from "./useTheme";
 const Footer = function () {
   const { user, setUser } = useContext(userContext);
-  console.log(user);
+  const { theme, setTheme } = useContext(themeContext);
+  console.log(theme);
   return (
     <div className="text-center mt-5">
       <h1>
@@ -13,6 +15,13 @@ const Footer = function () {
           }}
         >
           Change Context
+        </button>
+        <button
+          onClick={() => {
+            setTheme("none");
+          }}
+        >
+          Change Theme
         </button>{" "}
       </h1>
     </div>
