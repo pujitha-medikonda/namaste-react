@@ -1,13 +1,15 @@
-import restList from "../utilities/constants";
 import Restaurant from "./Restaurant";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useDeferredValue, useContext } from "react";
 import { Link } from "react-router-dom";
+import user from "./userContext";
 
 const Body = () => {
   const [listOfRestuarants, setListOfRestuarants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredList, setFilteredList] = useState([]);
-  console.log("Im rendered");
+  const deferredList = useDeferredValue(filteredList);
+
+  console.log(useContext(user));
   const fetchRest = async () => {
     const response = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4492116&lng=78.41820489999999&page_type=DESKTOP_WEB_LISTING"
@@ -16,36 +18,43 @@ const Body = () => {
     setListOfRestuarants(jsonData.data.cards[2].data.data.cards);
     setFilteredList(jsonData.data.cards[2].data.data.cards);
   };
-
+  console.log("Normal Render");
   useEffect(() => {
     fetchRest();
   }, []);
 
-  if (listOfRestuarants == 0) {
+  if (listOfRestuarants.length == 0) {
     return (
-      <div className="shimmer-Container">
-        <div className="shimmerCard"></div>
-        <div className="shimmerCard"></div>
-        <div className="shimmerCard"></div>
-        <div className="shimmerCard"></div>
-        <div className="shimmerCard"></div>
+      <div className="flex flex-wrap p-2 ">
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
+        <div className="bg-gray-100 border-solid border-x-slate-400 w-64 h-72 m-2"></div>
       </div>
     );
   }
 
   return (
-    <div className="grid mt-1 border-black border-solid border-2">
+    <div className="grid mt-3">
       <div className="btn-container">
         {" "}
-        <div className="searchDiv">
+        <div className="inline-block mb-3 ml-1">
           <input
             type="text"
-            className="searchText"
+            className="border-solid border-2 mr-1"
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
           ></input>
           <button
-            btn="searchBtn"
+            className="mr-4 border-solid border-2 px-2 rounded-sm bg-slate-200 text-fuchsia-900"
             onClick={(e) => {
               const filteredList = listOfRestuarants.filter((restuarant) => {
                 return restuarant.data?.name
@@ -57,10 +66,9 @@ const Body = () => {
           >
             Search
           </button>
-        </div>
-        <div>
+
           <button
-            className="btnClass"
+            className=" border-solid border-2 px-2 rounded-md bg-blue-400 text-white"
             onClick={() => {
               const filteredList = listOfRestuarants.filter(
                 (restuarant) => restuarant.data?.avgRating > 4
@@ -77,7 +85,7 @@ const Body = () => {
         {filteredList.map((restaurant) => {
           console.log(restaurant);
           return (
-            <Link className="mr-2 mt-3 ml-4" to={"/rest/" + restaurant.data.id}>
+            <Link className="" to={"/rest/" + restaurant.data.id}>
               <Restaurant resObj={restaurant} />
             </Link>
           );

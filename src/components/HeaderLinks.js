@@ -12,6 +12,9 @@ const Links = (
       <li className="px-2">
         <Link to="/contact">Contact Us</Link>
       </li>
+      <li className="px-2">
+        <Link to="/Instamart">Instamart</Link>
+      </li>
     </ul>
   </div>
 );
