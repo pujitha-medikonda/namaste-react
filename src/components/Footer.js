@@ -11,7 +11,7 @@ const Footer = function () {
         Its Footer Copyrights@{user.email}{" "}
         <button
           onClick={() => {
-            setUser({ name: "pavam", email: "pujitha.engg416@gmail.com" });
+            setUser({ name: "pavan", email: "pujitha.engg416@gmail.com" });
           }}
         >
           Change Context
